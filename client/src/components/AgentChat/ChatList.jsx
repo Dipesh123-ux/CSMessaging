@@ -38,7 +38,6 @@ const ChatList = ({ fetchAgain }) => {
 
     const filteredChats = chats?.filter(chat => chat.chatId.includes(searchQuery));
 
-
     const handleSelect = async (chat) =>{
         try{
            const response = await addAgentToList(chat._id,user._id);
@@ -80,7 +79,7 @@ const ChatList = ({ fetchAgain }) => {
             </Box>
             <Box pb={3} px={3} w='100%'>
                 <Input
-                    placeholder="Search by Chat ID"
+                    placeholder="Search by Customer ID"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
