@@ -6,9 +6,11 @@ exports.raiseQuery = async (req, res) => {
     const { chatId, userId } = req.body;
     const exists = await Chat.findOne({ chatId: chatId });
     if (exists) {
+      const chat = await Chat.findOne({ _id: exists._id }).populate("users");
       return res.status(200).json({
         success: true,
         message: "chat already initialized!",
+        fullChat : chat
       });
     }
     const newChat = await Chat.create({
@@ -18,7 +20,10 @@ exports.raiseQuery = async (req, res) => {
 
     const fullChat = await Chat.findOne({ _id: newChat._id }).populate("users");
 
-    return res.status(200).json(fullChat);
+    return res.status(200).json({
+      success : true,
+      fullChat: fullChat
+    });
   } catch (err) {
     console.log(err);
   }

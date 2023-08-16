@@ -6,8 +6,10 @@ exports.getAllMessages = async (req, res) => {
   try {
     const messages = await Message.find({ chat: req.params.chatId })
       .populate("sender", "userId isAgent")
-      .populate("chat");
-    res.json(messages);
+      .populate("chat")
+      .sort({ timestamp: 1 });
+
+    return res.json(messages);
   } catch (error) {
     res.status(400);
     throw new Error(error.message);
@@ -33,9 +35,10 @@ exports.sendMessage = async (req, res) => {
 
     await Chat.findByIdAndUpdate(chatId, { latestMessage: message });
 
-    res.json(message);
+    return res.send(message);
   } catch (error) {
-    res.status(400);
+    res.status(400)
     throw new Error(error.message);
   }
 };
+

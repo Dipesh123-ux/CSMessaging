@@ -1,8 +1,9 @@
 import React from 'react'
+import SelectRole from '../../components/Landing/page'
 
 const Index = () => {
   return (
-    <div>Index</div>
+    <SelectRole />
   )
 }
 
