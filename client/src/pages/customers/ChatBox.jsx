@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { ChatState } from '../../context/chatContext'
 import { Box } from "@chakra-ui/layout";
 import Chat from '../../components/CustomerChat/Chat'
@@ -9,6 +9,8 @@ const user = JSON.parse(localStorage.getItem('userInfo'));
 const ChatBox = () => {
 
     const { selectedChat, setSelectedChat } = ChatState();
+
+    const [fetchAgain, setFetchAgain] = useState(false);
 
 
     return (
@@ -24,7 +26,7 @@ const ChatBox = () => {
                 borderWidth="1px"
                 h={"100%"}
             >
-                <Chat />
+                <Chat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain}  />
             </Box>
         </Box>
     )

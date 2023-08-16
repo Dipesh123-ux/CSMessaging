@@ -60,9 +60,8 @@ const Chat = ({fetchAgain, setFetchAgain}) => {
 
     useEffect(() => {
         socket.on('message received', (newMessageReceived) => {
-            console.log(newMessageReceived?.chat?._id)
+            setFetchAgain(!fetchAgain);
             if (!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id) {
-                setFetchAgain(!fetchAgain);
                 if(!notification.includes(newMessageReceived?.chat?._id)){
                     setNotification([newMessageReceived?.chat?._id,...notification]);
                 }
